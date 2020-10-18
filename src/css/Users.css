@@ -1,0 +1,41 @@
+.searchBar {
+    position: fixed;
+    top: 0;
+    width: 25%;
+    background: #fff;
+  }
+.search {
+    width: 90%;
+    margin: 5px 0;
+    border-radius: 30px;
+    border: none;
+    padding: 13px 13px;
+    outline: none;
+    background: #f5f8fa;
+  }
+
+.listUsers {
+    display: flex;
+    /* justify-content: space-around; */
+    margin :20px; 
+    list-style: none
+     
+  }
+
+.btn {
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.btn-follow {
+  background: #1da1f2;
+  padding: 10px 15px;
+  font-weight: 800;
+  border-radius: 30px;
+}
+
+.iconUser {
+ 
+}
