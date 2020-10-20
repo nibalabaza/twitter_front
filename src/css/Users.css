@@ -14,13 +14,15 @@
     background: #f5f8fa;
   }
 
+.postForm__first {
+    
+}
 .listUsers {
     display: flex;
-    /* justify-content: space-around; */
+    justify-content: space-around;
     margin :20px; 
-    list-style: none
-     
-  }
+    list-style: none;
+}
 
 .btn {
   text-decoration: none;
@@ -34,8 +36,14 @@
   padding: 10px 15px;
   font-weight: 800;
   border-radius: 30px;
+  width: 100px
 }
 
-.iconUser {
- 
+.btn-followed {
+  background: rgb(198, 195, 195);
+  padding: 10px 15px;
+  font-weight: 800;
+  border-radius: 30px;
+  width: 120px;
+  
 }

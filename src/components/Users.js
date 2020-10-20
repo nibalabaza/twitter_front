@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserPlus} from "react-icons/fa"
 import Axios from 'axios';
 import UserSearch from './UserSearch';
-import '../css/Users.css'
+
 
 function Users() {
     const[users, setUsers] = useState([]);
@@ -22,33 +21,52 @@ function Users() {
         })
     },[])
     
-  return (
-    
-    <div className="container">
-        <div className="row">
-        <div className="col">
-            <h2>All users</h2>
-        </div>
-        <div className="col">
-        <UserSearch setUserfilter = {setUserfilter}></UserSearch>
+    function followUser(id_user){
+        const url = `http://localhost:3001/user/${id_user}/follow`
+        const authValue = "Bearer " + window.localStorage.getItem("jwt")
+        Axios.post(url,{}, {
+            headers: {
+                Authorization : authValue
+            } 
+        }).then(response => {
+            if(response.status === 200){
+                const modifiedUser = [...users]
+                modifiedUser.forEach(user =>{
+                    if(user.id_user=== id_user){
+                        user.is_followed = 1 //follow the user
+                    }
+                })
+                setUsers(modifiedUser)
+                console.log("modifiedUser",modifiedUser)
+            }
+        })
 
-        <h1>ALL USERS</h1>
-        {users.filter(user => user.pseudo.toUpperCase().includes(userfilter.toUpperCase())).map(user=>{
+    }
+    return (
+    
+    <>
+        
+        <UserSearch setUserfilter = {setUserfilter}></UserSearch>
+        <div className="container mt-4">
+            {users ? users.filter(user => user.pseudo.toUpperCase().includes(userfilter.toUpperCase())).map(user=>{
             console.log("USER", user)
             return (
-                <ul class="listUsers">
-                    
-                <FaUserPlus className="iconUser" />
-                <li>{user.pseudo}</li>
-                <li> {user.name}</li>
-                {!user.is_followed ? <button className="btn btn-follow" >Suivre</button> : null}
-                </ul>
                 
+                    
+                    <div className="row vertical-align">
+                        <div className="col-3"><img className="avatar" src="/assets/nibal.png" alt="" /></div>
+                            <div className="col-3">{user.pseudo} </div>
+                            <div className="col-3"> {user.name}</div>
+
+                            {!user.is_followed ?<div className="col-3" ><button onClick={()=>followUser(user.id_user)} className="btn btn-follow" >FOLLOW</button></div>  : null}
+                            {user.is_followed ? <div className="col-3"><button className="btn btn-followed" >FOLLOWED</button></div>  : null}
+                    </div>
+               
              )
-         })}
-         </div>
-         </div>
-    </div>
+         }) : null}
+       </div>
+       </>
+    
   );
 }
 

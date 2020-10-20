@@ -12,8 +12,8 @@ const submitComment = () => {
           Authorization:"Bearer " + window.localStorage.getItem("jwt")
         }})
         .then((response) => {
-            // setPosts([])
-          console.log(response);
+          
+          console.log("addComment response", response);
           props.onCommentUpload(response.data)//the reponse of the server contains the new comment created
       }).then(()=>{
         

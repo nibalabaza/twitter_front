@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+// import './Follow.css'
 
 function Followed() {
     const[users, setUsers] = useState([]);
